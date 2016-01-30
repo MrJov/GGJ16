@@ -61,5 +61,14 @@ public class Kitchen : MonoBehaviour {
 	public void SetActivePlayer(GameObject player){
 		activePlayer = player;
 		elapsedTime = 0f;
+		action = ChangeAction (Random.Range (0, 4));
+		action.buttonSequence.GetComponent<ShowButton> ().ShowNormal ();
+	}
+
+	public void Reset(){
+		for (int i = 0; i < possibleActions.Length; i++) {
+			possibleActions [i].buttonSequence.GetComponent<ShowButton> ().HideAll ();
+
+		}
 	}
 }

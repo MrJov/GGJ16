@@ -61,12 +61,13 @@ public class PlayerManager : MonoBehaviour {
 			}
 
 			if (disposition[i].gameZone.gameObject.name.Equals("KitchenZone")){
+				disposition [i].gameZone.gameObject.GetComponent<Kitchen> ().Reset ();
 				disposition[i].gameZone.gameObject.GetComponent<Kitchen>().enabled = false;
 				disposition [i].player.GetComponent<KitchenController> ().enabled = false;
 			}
 
 			if (disposition[i].gameZone.gameObject.name.Equals("IroningZone")){
-				disposition [i].gameZone.gameObject.GetComponent<Ironing> ().DisableInput ();
+				disposition [i].gameZone.gameObject.GetComponent<Ironing> ().Disable ();
 				disposition[i].gameZone.gameObject.GetComponent<Ironing>().enabled = false;
 				disposition [i].player.GetComponent<IroningController> ().enabled = false;
 			}
@@ -158,7 +159,7 @@ public class PlayerManager : MonoBehaviour {
 	}
 		
 	void RotateRight(){
-		for (int i = gameZones.Length; i > 0; i--) {
+		for (int i = gameZones.Length-1; i > 0; i--) {
 			GameObject tmp = gameZones [i];
 			gameZones [i] = gameZones [i - 1];
 			gameZones [i - 1] = tmp;
