@@ -17,6 +17,7 @@ public class Kitchen : MonoBehaviour {
 	Vector2 fullBarSize;
 	float elapsedTime = 0f;
 	Actions action;
+	bool active = false;
 
 	// Use this for initialization
 	void Start () {
@@ -28,21 +29,23 @@ public class Kitchen : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (elapsedTime > actionTime) {
-			action = ChangeAction (Random.Range (0, 4));
-			action.buttonSequence.GetComponent<ShowButton> ().ShowNormal ();
-			elapsedTime = 0f;
-		} else {
-			elapsedTime += Time.deltaTime;
+		if (active) {
+			if (elapsedTime > actionTime) {
+				action = ChangeAction (Random.Range (0, 4));
+				action.buttonSequence.GetComponent<ShowButton> ().ShowNormal ();
+				elapsedTime = 0f;
+			} else {
+				elapsedTime += Time.deltaTime;
+			}
+			string actionPerf = activePlayer.GetComponent<KitchenController> ().GetPlayerAction ();
+			Debug.Log (actionPerf);
+			if (action.actionName.Equals (actionPerf)) {
+				action.buttonSequence.GetComponent<ShowButton> ().ShowGreen ();
+			} else {
+				action.buttonSequence.GetComponent<ShowButton> ().ShowRed ();
+			}
+			float percTime = elapsedTime / actionTime;
 		}
-		string actionPerf = activePlayer.GetComponent<KitchenController> ().GetPlayerAction ();
-		Debug.Log(actionPerf);
-		if (action.actionName.Equals (actionPerf)) {
-			action.buttonSequence.GetComponent<ShowButton> ().ShowGreen ();
-		} else {
-			action.buttonSequence.GetComponent<ShowButton> ().ShowRed ();
-		}
-		float percTime = elapsedTime / actionTime;
 	}
 
 	Actions ChangeAction(int index){
@@ -63,9 +66,11 @@ public class Kitchen : MonoBehaviour {
 		elapsedTime = 0f;
 		action = ChangeAction (Random.Range (0, 4));
 		action.buttonSequence.GetComponent<ShowButton> ().ShowNormal ();
+		active = true;
 	}
 
 	public void Reset(){
+		active = false;
 		for (int i = 0; i < possibleActions.Length; i++) {
 			possibleActions [i].buttonSequence.GetComponent<ShowButton> ().HideAll ();
 
