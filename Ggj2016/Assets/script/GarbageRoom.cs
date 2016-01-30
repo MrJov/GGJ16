@@ -18,7 +18,7 @@ public class GarbageRoom: MonoBehaviour
 
     void Start()
     {
-        
+		buttonQueue = new Queue<GameObject>();
     }
 
     // Update is called once per frame
