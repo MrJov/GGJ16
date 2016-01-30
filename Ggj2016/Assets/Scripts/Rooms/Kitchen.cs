@@ -3,62 +3,57 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Kitchen : MonoBehaviour {
+	[System.Serializable]
+	public struct Actions
+	{
+		public GameObject buttonSequence;
+		public string actionName;
+	}
 
 	public float actionTime = 3f;
-	public Text actionToDo;
-	public Text actionPerformed;
-	public Text result;
-	public Image timeBar;
 	public GameObject activePlayer;
+	public Actions[] possibleActions = new Actions[4];
 
 	Vector2 fullBarSize;
 	float elapsedTime = 0f;
-	string action;
+	Actions action;
 
 	// Use this for initialization
 	void Start () {
-		action = GenerateAction (Random.Range (0, 4));
-		actionToDo.text = action;
-		fullBarSize = timeBar.rectTransform.sizeDelta;
+		action = ChangeAction (Random.Range (0, 4));
+		/*possibleActions [Random.Range (0, 4)];*/
+		action.buttonSequence.GetComponent<ShowButton> ().ShowNormal ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (elapsedTime > actionTime) {
-			action = GenerateAction (Random.Range (0, 4));
-			actionToDo.text = action;
+			action = ChangeAction (Random.Range (0, 4));
+			action.buttonSequence.GetComponent<ShowButton> ().ShowNormal ();
 			elapsedTime = 0f;
 		} else {
 			elapsedTime += Time.deltaTime;
 		}
 		string actionPerf = activePlayer.GetComponent<KitchenController> ().GetPlayerAction ();
-		actionPerformed.text = actionPerf;
-		if (action.Equals (actionPerf)) {
-			result.text = "OK";
+		Debug.Log(actionPerf);
+		if (action.actionName.Equals (actionPerf)) {
+			action.buttonSequence.GetComponent<ShowButton> ().ShowGreen ();
 		} else {
-			result.text = "NO";
+			action.buttonSequence.GetComponent<ShowButton> ().ShowRed ();
 		}
 		float percTime = elapsedTime / actionTime;
-		timeBar.rectTransform.sizeDelta = new Vector2 ((1 - percTime) * fullBarSize.x, fullBarSize.y);
 	}
 
-	string GenerateAction(int index){
-		switch (index) {
-		case 0:
-			return "UP AND DOWN";
-			break;
-		case 1:
-			return "LEFT AND RIGHT";
-			break;
-		case 2:
-			return "CLOCKWISE";
-			break;
-		case 3:
-			return "COUNTERCLOCKWISE";
-			break;
-		default:
-			return "WUT??";
-			break;
+	Actions ChangeAction(int index){
+		Actions act = new Actions();
+		for (int i = 0; i < possibleActions.Length; i++) {
+			if (i == index) {
+				act = possibleActions [i];
+			} else {
+				possibleActions [i].buttonSequence.GetComponent<ShowButton> ().HideAll ();
+			}
 		}
+
+		return act;
 	}
 }
