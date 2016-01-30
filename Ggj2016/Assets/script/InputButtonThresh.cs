@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputButton : MonoBehaviour
+public class InputButtonThresh : MonoBehaviour
 {
 
     // Use this for initialization

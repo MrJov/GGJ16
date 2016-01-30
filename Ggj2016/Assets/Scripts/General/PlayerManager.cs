@@ -47,7 +47,21 @@ public class PlayerManager : MonoBehaviour {
 			disposition [i].gameZone = gameZones [i];
 			disposition [i].arrived = false;
 		}
-		movePlayers = true;
+
+        for (int i = 0; i < disposition.Length; i++)
+        {
+            if (disposition[i].gameZone.gameObject.name.Equals("GarbageZone"))
+            {
+                disposition[i].gameZone.gameObject.GetComponent<minigame2>().enabled = false;
+                disposition[i].gameZone.gameObject.GetComponent<minigame2>().Delete();
+            }
+            if (disposition[i].gameZone.gameObject.name.Equals("BathroomZone")) 
+                disposition[i].gameZone.gameObject.GetComponent<minigame1>().enabled = false;
+
+        }
+
+
+        movePlayers = true;
 	}
 
 	void MovePlayers(){
@@ -60,8 +74,19 @@ public class PlayerManager : MonoBehaviour {
 				disposition [i].arrived = true;
 			}
 		}
-		if (disposition [0].arrived && disposition [1].arrived && disposition [2].arrived && disposition [3].arrived) {
+		if (disposition [0].arrived && disposition [1].arrived && disposition [2].arrived && disposition [3].arrived)
+        {
 			movePlayers = false;
+
+            for (int i = 0; i < disposition.Length; i++)
+            {
+                if (disposition[i].gameZone.gameObject.name.Equals("GarbageZone"))
+                    disposition[i].gameZone.gameObject.GetComponent<minigame2>().enabled = true;
+
+                if (disposition[i].gameZone.gameObject.name.Equals("BathroomZone"))
+                    disposition[i].gameZone.gameObject.GetComponent<minigame1>().enabled = true;
+
+            }
 		}
 	}
 

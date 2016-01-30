@@ -9,13 +9,13 @@ public class InputButtonToilet : MonoBehaviour {
     public string buttonB;
     public string buttonX;
     public string buttonY;
-    public GameObject Garbagezone;
+    public GameObject BathroomZone;
     minigame2 toilete;
     int count = 0;
 
 
     void Start () {
-        toilete = Garbagezone.GetComponent<minigame2>();
+        toilete = BathroomZone.GetComponent<minigame2>();
     }
 	
 	// Update is called once per frame
@@ -53,4 +53,4 @@ public class InputButtonToilet : MonoBehaviour {
 
     }
 }
-}
+

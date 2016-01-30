@@ -6,6 +6,7 @@ public class minigame1 : MonoBehaviour {
     // Use this for initialization
 
     public GameObject button;
+    public Transform position;
     public GameObject limit;
     private GameObject b;
    
@@ -14,7 +15,7 @@ public class minigame1 : MonoBehaviour {
     bool end = false;
 	void Start ()
     {
-        GameObject b = Instantiate(button, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+        GameObject b = Instantiate(button, new Vector3(position.position.x, position.position.y, position.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
         
     }
 
@@ -25,7 +26,7 @@ public class minigame1 : MonoBehaviour {
         if (t>Spawn)
         {
             
-            GameObject b = Instantiate(button, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+            GameObject b = Instantiate(button, new Vector3(position.position.x, position.position.y, position.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
            
             t = 0;
         }

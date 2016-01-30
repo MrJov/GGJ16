@@ -6,6 +6,8 @@ public class Button : MonoBehaviour {
     // Use this for initialization
 
     public bool end = false;
+    public float Check;
+
     private string type;
     public  bool move = false;
     public bool pressed=false;
@@ -18,20 +20,20 @@ public class Button : MonoBehaviour {
         {
             case 0:
                 type = "A";
-                gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("a_normal-01");
+                gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Buttons/A_normal-01");
                 break;
             case 1:
                 type = "B";
-                gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("b_normal-01");
+                gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Buttons/B_normal-01");
                 break;
            case 2:
                 type = "Y";
-                gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("y_normal-01");
+                gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Buttons/Y_normal-01");
                 break;
 
            case 3:
                 type = "X";
-                gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("x_normal-01");
+                gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Buttons/X_normal-01");
                 break;
         }
 
@@ -43,7 +45,10 @@ public class Button : MonoBehaviour {
     {
         if (move)
         {
-            if (!end)
+            if (transform.position.x < Check)
+                end = true;
+
+                    if (!end)
                 transform.position = new Vector3((transform.position.x - 0.1f), transform.position.y, transform.position.z);
           
                 
@@ -59,6 +64,8 @@ public class Button : MonoBehaviour {
         end = true;
         
     }
+
+
 
     void OnTriggerStay2D(Collider2D other)
     {
