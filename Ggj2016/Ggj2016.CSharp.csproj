@@ -78,11 +78,11 @@
     <Compile Include="Assets\Scripts\Player\KitchenController.cs" />
     <Compile Include="Assets\Scripts\Rooms\Ironing.cs" />
     <Compile Include="Assets\Scripts\Rooms\Kitchen.cs" />
+    <Compile Include="Assets\script\BathRoom.cs" />
     <Compile Include="Assets\script\Button.cs" />
-    <Compile Include="Assets\script\InputButtonThresh.cs" />
+    <Compile Include="Assets\script\GarbageRoom.cs" />
     <Compile Include="Assets\script\InputButtonToilet.cs" />
-    <Compile Include="Assets\script\minigame1.cs" />
-    <Compile Include="Assets\script\minigame2.cs" />
+    <Compile Include="Assets\script\InputButtonTrash.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
