@@ -7,6 +7,7 @@ public class Ironing : MonoBehaviour {
 	public Transform rightEnd;
 	public Transform correctPosition;
 	public Transform cursor;
+	public GameObject ironBar;
 	string playerButton = null;
 	public float cursorSpeed = 3f;
 	public GameObject button;
@@ -22,6 +23,7 @@ public class Ironing : MonoBehaviour {
 	void Start () {
 		float cursorWidth = cursor.GetComponent<Renderer> ().bounds.size.x;
 		offset = cursorWidth / 2;
+		ShowElements ();
 	}
 	
 	// Update is called once per frame
@@ -59,10 +61,20 @@ public class Ironing : MonoBehaviour {
 	public void SetActivePlayer(GameObject player){
 		activePlayer = player;
 		playerButton = activePlayer.GetComponent<IroningController> ().GetButtonA ();
+		ShowElements ();
 	}
 
-	public void DisableInput(){
+	public void Disable(){
 		playerButton = null;
+		ironBar.gameObject.SetActive (false);
+		cursor.gameObject.SetActive (false);
+		button.gameObject.SetActive (false);
+	}
+
+	void ShowElements(){
+		ironBar.gameObject.SetActive (true);
+		cursor.gameObject.SetActive (true);
+		button.gameObject.SetActive (true);
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){
