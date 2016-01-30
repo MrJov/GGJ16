@@ -10,46 +10,80 @@ public class InputButtonTrash : MonoBehaviour {
     public string buttonX;
     public string buttonY;
     public GameObject GarbageZone;
-    Minigame2 toilete;
-    int count = 0;
-	bool active = true;
-
+    GarbageRoom garbage;
+	bool active = false;
+    bool green = false;
 
     void Start () {
-        toilete = GarbageZone.GetComponent<Minigame2>();
+        garbage = GarbageZone.GetComponent<GarbageRoom>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if (active) {
-			if (Input.GetButton (buttonA) && toilete.buttons [count].GetComponent<Button> ().getType ().Equals ("A")) {
+        if (active && garbage.buttonQueue.Count>0)
+        {
+            Debug.Log("Active");
 
-				count++;
+            if (garbage.buttonQueue.Peek().GetComponent<Button>().pressed)
+            {
+                if (garbage.buttonQueue.Peek().GetComponent<Button>().getType().Equals("A") && Input.GetButton(buttonA))
+                {
+                    green = true;
+                    garbage.limit.GetComponent<SpriteRenderer>().color = Color.green;
+                }
+                else
+                if (garbage.buttonQueue.Peek().GetComponent<Button>().getType().Equals("B") && Input.GetButton(buttonB))
+                {
+                    green = true;
+                    garbage.limit.GetComponent<SpriteRenderer>().color = Color.green;
+                }
+                else
+                if (garbage.buttonQueue.Peek().GetComponent<Button>().getType().Equals("X") && Input.GetButton(buttonX))
+                {
+                    green = true;
+                    garbage.limit.GetComponent<SpriteRenderer>().color = Color.green;
 
-			} else if (Input.GetButton (buttonB) && toilete.buttons [count].GetComponent<Button> ().getType ().Equals ("B")) {
-				count++;
+                }
+                else
+                if (garbage.buttonQueue.Peek().GetComponent<Button>().getType().Equals("Y") && Input.GetButton(buttonY))
+                {
+                    green = true;
+                    garbage.limit.GetComponent<SpriteRenderer>().color = Color.green;
 
-			} else if (Input.GetButton (buttonX) && toilete.buttons [count].GetComponent<Button> ().getType ().Equals ("X")) {
+                }
+                
+                Debug.Log("clear");
+                if (!green)
+                    garbage.limit.GetComponent<SpriteRenderer>().color = Color.red;
+                else {
+                    garbage.limit.GetComponent<SpriteRenderer>().color = Color.green;
+                    green = false;
+                }
+                Destroy(garbage.buttonQueue.Dequeue());
+            }
 
-				count++;
+           
 
-			} else if (Input.GetButton (buttonY) && toilete.buttons [count].GetComponent<Button> ().getType ().Equals ("Y")) {
-				count++;
+        }
+        }
+    public void Enable()
+    {
 
-			} else
-				count = 0;
-		}
+        garbage = GarbageZone.GetComponent<GarbageRoom>();
+        garbage.limit.GetComponent<SpriteRenderer>().color = Color.white;
+        active = true;
 
     }
 
-	public void Enable(){
-		toilete = GarbageZone.GetComponent<Minigame2>();
-		active = true;
-	}
+    public void Disable()
+    {
+        if(active)
+            for(int i=0;i<garbage.buttonQueue.Count;i++)
+                Destroy(garbage.buttonQueue.Dequeue());
 
-	public void Disable(){
-		active = false;
-	}
+        active = false;
+
+    }
 }
 

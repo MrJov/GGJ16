@@ -25,7 +25,7 @@ public class ActiveGame : MonoBehaviour
         {
 
             other.gameObject.GetComponent<InputButtonTrash>().enabled = true;
-            buttonPosition.GetComponent<Minigame2>().enabled = true;
+            buttonPosition.GetComponent<GarbageRoom>().enabled = true;
         }
         else
 
@@ -33,7 +33,7 @@ public class ActiveGame : MonoBehaviour
         {
 
             other.gameObject.GetComponent<InputButtonToilet>().enabled = true;
-            buttonPosition.GetComponent<Minigame1>().enabled = true;
+            buttonPosition.GetComponent<BathRoom>().enabled = true;
         }
 
 
@@ -46,7 +46,7 @@ public class ActiveGame : MonoBehaviour
         {
 
             other.gameObject.GetComponent<InputButtonTrash>().enabled = false;
-            buttonPosition.GetComponent<Minigame2>().enabled = false;
+            buttonPosition.GetComponent<GarbageRoom>().enabled = false;
         }
         else
 
@@ -54,7 +54,7 @@ public class ActiveGame : MonoBehaviour
         {
 
             other.gameObject.GetComponent<InputButtonToilet>().enabled = false;
-            buttonPosition.GetComponent<Minigame1>().enabled = false;
+            buttonPosition.GetComponent<BathRoom>().enabled = false;
         }
     }
 }

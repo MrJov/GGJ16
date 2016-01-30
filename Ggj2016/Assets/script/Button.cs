@@ -6,7 +6,6 @@ public class Button : MonoBehaviour {
     // Use this for initialization
 
     public bool end = false;
-    public float Check;
 
     private string type;
     public  bool move = false;
@@ -45,17 +44,13 @@ public class Button : MonoBehaviour {
     {
         if (move)
         {
-            if (transform.position.x < Check)
-                end = true;
-
                     if (!end)
-                transform.position = new Vector3((transform.position.x - 0.1f), transform.position.y, transform.position.z);
+                        transform.position = new Vector3((transform.position.x - 0.1f), transform.position.y, transform.position.z);
           
                 
         }
 
-        if (end)
-            Destroy(gameObject);
+       
     }
 
     void OnTriggerExit2D(Collider2D other)
