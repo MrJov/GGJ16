@@ -23,6 +23,11 @@ public class PlayerManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//RandomizeArray (gameZones);
+		for (int i = 0; i < disposition.Length; i++) {
+			disposition [i].player = players [i];
+			disposition [i].gameZone = gameZones [i];
+			disposition [i].arrived = false;
+		}
 		AssignPlayers ();
 	}
 	
@@ -42,23 +47,37 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	void AssignPlayers (){
+
+		for (int i = 0; i < disposition.Length; i++)
+		{
+			if (disposition[i].gameZone.gameObject.name.Equals("GarbageZone"))
+			{
+				disposition[i].gameZone.gameObject.GetComponent<minigame2>().enabled = false;
+				disposition[i].gameZone.gameObject.GetComponent<minigame2>().Delete();
+			}
+			if (disposition [i].gameZone.gameObject.name.Equals ("BathroomZone")) {
+				disposition [i].gameZone.gameObject.GetComponent<minigame1> ().enabled = false;
+				disposition [i].player.GetComponent<InputButtonToilet> ().enabled = false;
+			}
+
+			if (disposition[i].gameZone.gameObject.name.Equals("KitchenZone")){
+				disposition[i].gameZone.gameObject.GetComponent<Kitchen>().enabled = false;
+				disposition [i].player.GetComponent<KitchenController> ().enabled = false;
+			}
+
+			if (disposition[i].gameZone.gameObject.name.Equals("IroningZone")){
+				disposition [i].gameZone.gameObject.GetComponent<Ironing> ().DisableInput ();
+				disposition[i].gameZone.gameObject.GetComponent<Ironing>().enabled = false;
+				disposition [i].player.GetComponent<IroningController> ().enabled = false;
+			}
+		}
+
 		for (int i = 0; i < disposition.Length; i++) {
 			disposition [i].player = players [i];
 			disposition [i].gameZone = gameZones [i];
 			disposition [i].arrived = false;
 		}
 
-        for (int i = 0; i < disposition.Length; i++)
-        {
-            if (disposition[i].gameZone.gameObject.name.Equals("GarbageZone"))
-            {
-                disposition[i].gameZone.gameObject.GetComponent<minigame2>().enabled = false;
-                disposition[i].gameZone.gameObject.GetComponent<minigame2>().Delete();
-            }
-            if (disposition[i].gameZone.gameObject.name.Equals("BathroomZone")) 
-                disposition[i].gameZone.gameObject.GetComponent<minigame1>().enabled = false;
-
-        }
 
 
         movePlayers = true;
@@ -80,12 +99,25 @@ public class PlayerManager : MonoBehaviour {
 
             for (int i = 0; i < disposition.Length; i++)
             {
-                if (disposition[i].gameZone.gameObject.name.Equals("GarbageZone"))
-                    disposition[i].gameZone.gameObject.GetComponent<minigame2>().enabled = true;
+				if (disposition [i].gameZone.gameObject.name.Equals ("GarbageZone")) {
+					disposition [i].gameZone.gameObject.GetComponent<minigame2> ().enabled = true;
+					disposition [i].player.GetComponent<InputButtonThresh> ().enabled = true;
+				}
+				if (disposition [i].gameZone.gameObject.name.Equals ("BathroomZone")) {
+					disposition [i].gameZone.gameObject.GetComponent<minigame1> ().enabled = true;
+					disposition [i].player.GetComponent<InputButtonToilet> ().enabled = true;
+				}
+				if (disposition[i].gameZone.gameObject.name.Equals("KitchenZone")){
+					disposition[i].gameZone.gameObject.GetComponent<Kitchen>().enabled = true;
+					disposition [i].player.GetComponent<KitchenController> ().enabled = true;
+					disposition[i].gameZone.gameObject.GetComponent<Kitchen>().SetActivePlayer(disposition[i].player);
+				}
 
-                if (disposition[i].gameZone.gameObject.name.Equals("BathroomZone"))
-                    disposition[i].gameZone.gameObject.GetComponent<minigame1>().enabled = true;
-
+				if (disposition[i].gameZone.gameObject.name.Equals("IroningZone")){
+					disposition[i].gameZone.gameObject.GetComponent<Ironing>().enabled = true;
+					disposition [i].player.GetComponent<IroningController> ().enabled = true;
+					disposition[i].gameZone.gameObject.GetComponent<Ironing>().SetActivePlayer(disposition[i].player);
+				}
             }
 		}
 	}

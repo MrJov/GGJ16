@@ -7,7 +7,7 @@ public class Ironing : MonoBehaviour {
 	public Transform rightEnd;
 	public Transform correctPosition;
 	public Transform cursor;
-	public string playerButton;
+	string playerButton = null;
 	public float cursorSpeed = 3f;
 	public GameObject button;
 	int direction = -1;
@@ -16,6 +16,7 @@ public class Ironing : MonoBehaviour {
 	float elapsedTime = 0f;
 	bool countTime = false;
 	bool correct = false;
+	GameObject activePlayer;
 
 	// Use this for initialization
 	void Start () {
@@ -25,32 +26,43 @@ public class Ironing : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (cursor.position.x - offset <= leftEnd.position.x) {
-			direction = 1;
-		}
-		if (cursor.position.x + offset >= rightEnd.position.x) {
-			direction = -1;
-		}
-		cursor.Translate (new Vector3 (cursorSpeed, 0f, 0f) * Time.deltaTime * direction);
-		if (Input.GetButtonDown (playerButton)) {
-			if (correct) {
-				button.GetComponent<ShowButton> ().ShowGreen ();
-			} else {
-				button.GetComponent<ShowButton> ().ShowRed ();
+		if (playerButton != null) {
+			if (cursor.position.x - offset <= leftEnd.position.x) {
+				direction = 1;
 			}
-			countTime = true;
-			elapsedTime = 0f;
-		}
-		if (countTime) {
-			if (elapsedTime > interval) {
-				button.GetComponent<ShowButton> ().ShowNormal ();
+			if (cursor.position.x + offset >= rightEnd.position.x) {
+				direction = -1;
+			}
+			cursor.Translate (new Vector3 (cursorSpeed, 0f, 0f) * Time.deltaTime * direction);
+			if (Input.GetButtonDown (playerButton)) {
+				if (correct) {
+					button.GetComponent<ShowButton> ().ShowGreen ();
+				} else {
+					button.GetComponent<ShowButton> ().ShowRed ();
+				}
+				countTime = true;
 				elapsedTime = 0f;
-				countTime = false;
-			} else {
-				elapsedTime += Time.deltaTime;
+			}
+			if (countTime) {
+				if (elapsedTime > interval) {
+					button.GetComponent<ShowButton> ().ShowNormal ();
+					elapsedTime = 0f;
+					countTime = false;
+				} else {
+					elapsedTime += Time.deltaTime;
+				}
 			}
 		}
 
+	}
+
+	public void SetActivePlayer(GameObject player){
+		activePlayer = player;
+		playerButton = activePlayer.GetComponent<IroningController> ().GetButtonA ();
+	}
+
+	public void DisableInput(){
+		playerButton = null;
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){

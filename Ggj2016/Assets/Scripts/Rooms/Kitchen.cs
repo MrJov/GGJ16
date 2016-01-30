@@ -11,7 +11,7 @@ public class Kitchen : MonoBehaviour {
 	}
 
 	public float actionTime = 3f;
-	public GameObject activePlayer;
+	GameObject activePlayer;
 	public Actions[] possibleActions = new Actions[4];
 
 	Vector2 fullBarSize;
@@ -23,6 +23,7 @@ public class Kitchen : MonoBehaviour {
 		action = ChangeAction (Random.Range (0, 4));
 		/*possibleActions [Random.Range (0, 4)];*/
 		action.buttonSequence.GetComponent<ShowButton> ().ShowNormal ();
+		elapsedTime = 0f;
 	}
 	
 	// Update is called once per frame
@@ -55,5 +56,10 @@ public class Kitchen : MonoBehaviour {
 		}
 
 		return act;
+	}
+
+	public void SetActivePlayer(GameObject player){
+		activePlayer = player;
+		elapsedTime = 0f;
 	}
 }
