@@ -1,11 +1,13 @@
-﻿<Properties StartupItem="Ggj2016.CSharp.csproj">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\script\InputButtonToilet.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\script\BathRoom.cs">
     <Files>
-      <File FileName="Assets\script\InputButtonToilet.cs" Line="69" Column="23" />
-      <File FileName="Assets\Scripts\General\PlayerManager.cs" Line="109" Column="58" />
-      <File FileName="Assets\ActiveGame.cs" Line="48" Column="59" />
-      <File FileName="Assets\script\InputButtonTrash.cs" Line="47" Column="20" />
+      <File FileName="Assets\Scripts\General\MapManager.cs" Line="91" Column="18" />
+      <File FileName="Assets\Scripts\General\LevelManager.cs" Line="61" Column="18" />
+      <File FileName="Assets\Scripts\Rooms\Kitchen.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\General\MovementSpot.cs" Line="61" Column="1" />
+      <File FileName="Assets\Scripts\Player\MapPlayer.cs" Line="14" Column="1" />
+      <File FileName="Assets\script\BathRoom.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
