@@ -9,9 +9,12 @@ public class Ironing : MonoBehaviour {
 	public Transform cursor;
 	public string playerButton;
 	public float cursorSpeed = 3f;
-	public GameObject result;
+	public GameObject button;
 	int direction = -1;
 	float offset = 0f;
+	float interval = .3f;
+	float elapsedTime = 0f;
+	bool countTime = false;
 	bool correct = false;
 
 	// Use this for initialization
@@ -23,21 +26,31 @@ public class Ironing : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (cursor.position.x - offset <= leftEnd.position.x) {
-			result.GetComponent<Renderer> ().material.color = Color.white;
 			direction = 1;
 		}
 		if (cursor.position.x + offset >= rightEnd.position.x) {
-			result.GetComponent<Renderer> ().material.color = Color.white;
 			direction = -1;
 		}
 		cursor.Translate (new Vector3 (cursorSpeed, 0f, 0f) * Time.deltaTime * direction);
 		if (Input.GetButtonDown (playerButton)) {
 			if (correct) {
-				result.GetComponent<Renderer> ().material.color = Color.green;
+				button.GetComponent<ShowButton> ().ShowGreen ();
 			} else {
-				result.GetComponent<Renderer> ().material.color = Color.red;
+				button.GetComponent<ShowButton> ().ShowRed ();
+			}
+			countTime = true;
+			elapsedTime = 0f;
+		}
+		if (countTime) {
+			if (elapsedTime > interval) {
+				button.GetComponent<ShowButton> ().ShowNormal ();
+				elapsedTime = 0f;
+				countTime = false;
+			} else {
+				elapsedTime += Time.deltaTime;
 			}
 		}
+
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){
