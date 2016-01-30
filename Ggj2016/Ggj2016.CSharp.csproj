@@ -73,6 +73,8 @@
   <ItemGroup>
     <Compile Include="Assets\ActiveGame.cs" />
     <Compile Include="Assets\Scripts\General\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\General\ShowButton.cs" />
+    <Compile Include="Assets\Scripts\Player\IroningController.cs" />
     <Compile Include="Assets\Scripts\Player\KitchenController.cs" />
     <Compile Include="Assets\Scripts\Rooms\Ironing.cs" />
     <Compile Include="Assets\Scripts\Rooms\Kitchen.cs" />
