@@ -52,12 +52,15 @@ public class PlayerManager : MonoBehaviour {
 		{
 			if (disposition[i].gameZone.gameObject.name.Equals("GarbageZone"))
 			{
-				disposition[i].gameZone.gameObject.GetComponent<minigame2>().enabled = false;
-				disposition[i].gameZone.gameObject.GetComponent<minigame2>().Delete();
+				disposition [i].player.GetComponent<InputButtonTrash> ().Disable ();
+				disposition [i].player.GetComponent<InputButtonTrash> ().enabled = false;
+				disposition[i].gameZone.gameObject.GetComponent<Minigame2>().enabled = false;
+				disposition[i].gameZone.gameObject.GetComponent<Minigame2>().Delete();
 			}
 			if (disposition [i].gameZone.gameObject.name.Equals ("BathroomZone")) {
-				disposition [i].gameZone.gameObject.GetComponent<minigame1> ().enabled = false;
+				disposition [i].player.GetComponent<InputButtonToilet> ().Disable ();
 				disposition [i].player.GetComponent<InputButtonToilet> ().enabled = false;
+				disposition [i].gameZone.gameObject.GetComponent<Minigame1> ().enabled = false;
 			}
 
 			if (disposition[i].gameZone.gameObject.name.Equals("KitchenZone")){
@@ -101,12 +104,14 @@ public class PlayerManager : MonoBehaviour {
             for (int i = 0; i < disposition.Length; i++)
             {
 				if (disposition [i].gameZone.gameObject.name.Equals ("GarbageZone")) {
-					disposition [i].gameZone.gameObject.GetComponent<minigame2> ().enabled = true;
-					disposition [i].player.GetComponent<InputButtonThresh> ().enabled = true;
+					disposition [i].gameZone.gameObject.GetComponent<Minigame2> ().enabled = true;
+					disposition [i].player.GetComponent<InputButtonTrash> ().enabled = true;
+					disposition [i].player.GetComponent<InputButtonTrash> ().Enable ();
 				}
 				if (disposition [i].gameZone.gameObject.name.Equals ("BathroomZone")) {
-					disposition [i].gameZone.gameObject.GetComponent<minigame1> ().enabled = true;
+					disposition [i].gameZone.gameObject.GetComponent<Minigame1> ().enabled = true;
 					disposition [i].player.GetComponent<InputButtonToilet> ().enabled = true;
+					disposition [i].player.GetComponent<InputButtonToilet> ().Enable ();
 				}
 				if (disposition[i].gameZone.gameObject.name.Equals("KitchenZone")){
 					disposition[i].gameZone.gameObject.GetComponent<Kitchen>().enabled = true;

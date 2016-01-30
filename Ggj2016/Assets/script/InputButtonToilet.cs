@@ -1,56 +1,76 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputButtonToilet : MonoBehaviour {
+public class InputButtonToilet : MonoBehaviour
+{
 
     // Use this for initialization
-
     public string buttonA;
     public string buttonB;
     public string buttonX;
     public string buttonY;
-    public GameObject BathroomZone;
-    minigame2 toilete;
-    int count = 0;
+	public GameObject BathroomZone;
+    Minigame1 garbage;
+	bool active = false;
 
 
-    void Start () {
-        toilete = BathroomZone.GetComponent<minigame2>();
+    void Start ()
+    {
+		garbage=BathroomZone.GetComponent<Minigame1>();
+
+
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetButton(buttonA) && toilete.buttons[count].GetComponent<Button>().getType().Equals("A"))
-        {
 
-            count++;
+        if (Input.GetButton(buttonA))
+        {
+          
+            if (garbage.getbutton().GetComponent<Button>().GetType().Equals("A") && garbage.getbutton().GetComponent<Button>().pressed)
+            {
+                Debug.Log("great");
+            }
 
         }
-        else
-        if (Input.GetButton(buttonB) && toilete.buttons[count].GetComponent<Button>().getType().Equals("B"))
+      
+        if (Input.GetButton(buttonB))
         {
-            count++;
+            if (garbage.getbutton().GetComponent<Button>().GetType().Equals("B") && garbage.getbutton().GetComponent<Button>().pressed)
+            {
+                Debug.Log("great");
+            }
 
         }
-        else
-
-        if (Input.GetButton(buttonX) && toilete.buttons[count].GetComponent<Button>().getType().Equals("X"))
+   
+        if (Input.GetButton(buttonX))
         {
 
-            count++;
+            if (garbage.getbutton().GetComponent<Button>().GetType().Equals("X") && garbage.getbutton().GetComponent<Button>().pressed)
+            {
+                Debug.Log("great");
+            }
 
         }
-        else
-        if (Input.GetButton(buttonY) && toilete.buttons[count].GetComponent<Button>().getType().Equals("Y"))
+      
+        if (Input.GetButton(buttonY))
         {
-            count++;
+            if (garbage.getbutton().GetComponent<Button>().GetType().Equals("Y") && garbage.getbutton().GetComponent<Button>().pressed)
+            {
+                Debug.Log("great");
+            }
 
         }
-        else
-            count = 0;
-
-
     }
-}
 
+
+	public void Enable(){
+		garbage=BathroomZone.GetComponent<Minigame1>();
+		active = true;
+	}
+
+	public void Disable(){
+		active = false;
+	}
+}

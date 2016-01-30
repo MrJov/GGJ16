@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class minigame2 : MonoBehaviour {
+public class Minigame2 : MonoBehaviour {
 
     // Use this for initialization
     private float t;

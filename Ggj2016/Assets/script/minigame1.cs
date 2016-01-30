@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class minigame1 : MonoBehaviour {
+public class Minigame1 : MonoBehaviour {
 
     // Use this for initialization
 
