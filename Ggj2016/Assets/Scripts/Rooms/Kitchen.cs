@@ -7,6 +7,7 @@ public class Kitchen : MonoBehaviour {
 	public float actionTime = 3f;
 	public Text actionToDo;
 	public Text actionPerformed;
+	public Text result;
 	public Image timeBar;
 	public GameObject activePlayer;
 
@@ -32,6 +33,11 @@ public class Kitchen : MonoBehaviour {
 		}
 		string actionPerf = activePlayer.GetComponent<KitchenController> ().GetPlayerAction ();
 		actionPerformed.text = actionPerf;
+		if (action.Equals (actionPerf)) {
+			result.text = "OK";
+		} else {
+			result.text = "NO";
+		}
 		float percTime = elapsedTime / actionTime;
 		timeBar.rectTransform.sizeDelta = new Vector2 ((1 - percTime) * fullBarSize.x, fullBarSize.y);
 	}
@@ -39,16 +45,16 @@ public class Kitchen : MonoBehaviour {
 	string GenerateAction(int index){
 		switch (index) {
 		case 0:
-			return "Up and down";
+			return "UP AND DOWN";
 			break;
 		case 1:
-			return "Left and right";
+			return "LEFT AND RIGHT";
 			break;
 		case 2:
-			return "Clockwise";
+			return "CLOCKWISE";
 			break;
 		case 3:
-			return "Counterclockwise";
+			return "COUNTERCLOCKWISE";
 			break;
 		default:
 			return "WUT??";

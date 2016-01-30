@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Player\KitchenController.cs" />
+     <Compile Include="Assets\Scripts\Rooms\Ironing.cs" />
      <Compile Include="Assets\Scripts\Rooms\Kitchen.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
