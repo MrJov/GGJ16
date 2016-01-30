@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour {
 	public GameObject[] players = new GameObject[4];
 	public GameObject[] gameZones = new GameObject[4];
 	PlayerDisposition[] disposition = new PlayerDisposition[4];
-	float speed = 2f;
+	public float speed = 4f;
 
 	public float levelTime = 5f;
 	float elapsedTime = 0f;
@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		RandomizeArray (gameZones);
+		//RandomizeArray (gameZones);
 		AssignPlayers ();
 	}
 	
@@ -30,6 +30,14 @@ public class PlayerManager : MonoBehaviour {
 	void Update () {
 		if (movePlayers) {
 			MovePlayers ();
+		} else {
+			if (elapsedTime > levelTime) {
+				RotatePositions ();
+				AssignPlayers ();
+				elapsedTime = 0;
+			} else {
+				elapsedTime += Time.deltaTime;
+			}
 		}
 	}
 
@@ -46,9 +54,9 @@ public class PlayerManager : MonoBehaviour {
 		float step = speed * Time.deltaTime;
 		for (int i = 0; i < disposition.Length; i++) {
 			disposition [i].player.transform.position = Vector3.MoveTowards (disposition [i].player.transform.position, 
-																			disposition [i].gameZone.transform.position,
+																			disposition [i].gameZone.transform.GetChild(0).position,
 																			step);
-			if (disposition [i].player.transform.position == disposition [i].gameZone.transform.position) {
+			if (disposition [i].player.transform.position == disposition [i].gameZone.transform.GetChild(0).position) {
 				disposition [i].arrived = true;
 			}
 		}
@@ -68,6 +76,7 @@ public class PlayerManager : MonoBehaviour {
 
 	void RotatePositions(){
 		int mode = Random.Range (0, 3);
+		Debug.Log (mode);
 		switch (mode) {
 		case 0:
 			RotateLeft ();
@@ -92,8 +101,19 @@ public class PlayerManager : MonoBehaviour {
 	}
 		
 	void RotateRight(){
+		for (int i = gameZones.Length; i > 0; i--) {
+			GameObject tmp = gameZones [i];
+			gameZones [i] = gameZones [i - 1];
+			gameZones [i - 1] = tmp;
+		}
 	}
 
 	void RotateCross(){
+		GameObject tmp = gameZones [0];
+		gameZones [0] = gameZones [2];
+		gameZones [2] = tmp;
+		tmp = gameZones [1];
+		gameZones [1] = gameZones [3];
+		gameZones [3] = tmp;
 	}
 }
