@@ -10,7 +10,7 @@ public class minigame2 : MonoBehaviour {
     public float timer;
     public float number;
     public float offset;
-    List<GameObject> buttons;
+    public  List<GameObject> buttons;
     void Start ()
     {
         buttons = new List<GameObject>();

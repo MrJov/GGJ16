@@ -8,6 +8,7 @@ public class Button : MonoBehaviour {
     public bool end = false;
     private string type;
     public  bool move = false;
+    public bool pressed=false;
  
 
 	void Start ()
@@ -54,8 +55,15 @@ public class Button : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D other)
     {
+        pressed = false;
         end = true;
         
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        pressed = true;
+
     }
 
     public bool getEnd()

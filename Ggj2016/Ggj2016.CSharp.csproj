@@ -71,7 +71,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Player\KitchenController.cs" />
+    <Compile Include="Assets\Scripts\Rooms\Ironing.cs" />
+    <Compile Include="Assets\Scripts\Rooms\Kitchen.cs" />
     <Compile Include="Assets\script\Button.cs" />
+    <Compile Include="Assets\script\InputButtonThresh.cs" />
+    <Compile Include="Assets\script\InputButtonToilet.cs" />
     <Compile Include="Assets\script\minigame1.cs" />
     <Compile Include="Assets\script\minigame2.cs" />
   </ItemGroup>
