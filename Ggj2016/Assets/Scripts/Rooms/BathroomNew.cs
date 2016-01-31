@@ -29,7 +29,8 @@ public class BathroomNew : MonoBehaviour {
 				if (activePlayer.GetComponent<BathroomControl> ().IsReady ()) {
 					string[] sequenceInput = activePlayer.GetComponent<BathroomControl> ().GetSequence ();
 					bool correct = true;
-					for (int i = 0; i < sequenceLength; i++) {
+					for (int i = 0; i < sequenceLength; i++)
+                    {
 						if ((sequenceInput [i].Equals ("A") && !sequence[i].GetComponent<ShowButton>().GetLetter().Equals("A")) ||
 							(sequenceInput [i].Equals ("B") && !sequence[i].GetComponent<ShowButton>().GetLetter().Equals("B")) ||
 							(sequenceInput [i].Equals ("X") && !sequence[i].GetComponent<ShowButton>().GetLetter().Equals("X")) ||
@@ -38,10 +39,18 @@ public class BathroomNew : MonoBehaviour {
 						}
 					}
 					if (correct) {
-						Debug.Log ("BATHROOOOOOOOOOOOOOOOOM");
-						FindObjectOfType<RewardManager> ().Increment ();
+                        for (int i = 0; i < sequenceLength; i++)
+                        {
+                            sequence[i].GetComponent<ShowButton>().ShowGreen();
+                        }
+                            FindObjectOfType<RewardManager> ().Increment ();
 					} else {
-						Debug.Log ("STILL OK DUDE");
+
+                        for (int i = 0; i < sequenceLength; i++)
+                        {
+                            sequence[i].GetComponent<ShowButton>().ShowRed();
+                        }
+                        Debug.Log ("STILL OK DUDE");
 					}
 					EraseSequence ();
 					PrepareSequence ();
