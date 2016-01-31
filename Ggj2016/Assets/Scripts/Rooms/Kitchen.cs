@@ -44,7 +44,7 @@ public class Kitchen : MonoBehaviour {
 				elapsedTime += Time.deltaTime;
 			}
 			string actionPerf = activePlayer.GetComponent<KitchenController> ().GetPlayerAction ();
-			Debug.Log (actionPerf);
+			//Debug.Log (actionPerf);
 			if (action.actionName.Equals (actionPerf)) {
 				action.buttonSequence.GetComponent<ShowButton> ().ShowGreen ();
 				correctTime += Time.deltaTime;
