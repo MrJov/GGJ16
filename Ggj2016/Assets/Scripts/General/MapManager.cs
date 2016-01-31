@@ -25,6 +25,23 @@ public class MapManager : MonoBehaviour {
 
 	public GameObject GUI;
 
+	bool addCoins = false;
+	int numCoins = 0;
+	int coinsToAdd = 0;
+	int addedCoins = 0;
+	public GameObject moneyBox;
+	public GameObject coinsSpawnPoint;
+	public GameObject coin;
+	public float coinInterval;
+	float elapsedCoins = 0f;
+	public float coinsSpeed = 8f;
+
+	public GameObject check;
+	public float timeCheck;
+	float elapsedCheck;
+	bool showingCheck = false;
+	bool checkOn = false;
+
 	// Use this for initialization
 	void Start () {
 		AssignPlayers ();
@@ -32,14 +49,38 @@ public class MapManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (movePlayers) {
+		if (checkOn && !fadeIn) {
+			ShowCheck ();
+		}
+		if (movePlayers && !showingCheck) {
 			MovePlayers ();
 		}
-		if (fadeOut) {
+		if (addCoins && !showingCheck) {
+			MoveCoins ();
+		}
+		if (fadeOut && !addCoins && !showingCheck) {
 			Fade (false);
 		}
 		if (fadeIn) {
 			Fade (true);
+		}
+	}
+
+	void MoveCoins(){
+		if (addedCoins < coinsToAdd) {
+			if (elapsedCoins >= coinInterval) {
+				GameObject go = Instantiate<GameObject> (coin) as GameObject;
+				go.transform.position = coinsSpawnPoint.transform.position;
+				go.GetComponent<Coin> ().Move (moneyBox, coinsSpeed);
+				addedCoins++;
+				numCoins++;
+				elapsedCoins = 0f;
+			} else {
+				elapsedCoins += Time.deltaTime;
+			}
+		} else {
+			addCoins = false;
+			addedCoins = 0;
 		}
 	}
 
@@ -68,6 +109,7 @@ public class MapManager : MonoBehaviour {
 
 			for (int i = 0; i < players.Length; i++) {
 				players [i].GetComponent<Renderer> ().enabled = false;
+				moneyBox.GetComponent<Renderer> ().enabled = false;
 			}
 		}
 	}
@@ -90,8 +132,10 @@ public class MapManager : MonoBehaviour {
 			if (appearing) {
 				for (int i = 0; i < players.Length; i++) {
 					players [i].GetComponent<Renderer> ().enabled = true;
+					moneyBox.GetComponent<Renderer> ().enabled = true;
 				}
 				fadeIn = false;
+				addCoins = true;
 				RotatePositions ();
 				AssignPlayers ();
 			} else {
@@ -148,5 +192,27 @@ public class MapManager : MonoBehaviour {
 		tmp = gameZones [1];
 		gameZones [1] = gameZones [3];
 		gameZones [3] = tmp;
+	}
+
+	public void AddCoins(int num){
+		coinsToAdd = num;
+	}
+
+	void ShowCheck(){
+		if (!showingCheck) {
+			showingCheck = true;
+			check.SetActive (true);
+		} else if (elapsedCheck > timeCheck) {
+			showingCheck = false;
+			check.SetActive (false);
+			checkOn = false;
+			elapsedCheck = 0f;
+		} else {
+			elapsedCheck += Time.deltaTime;
+		}
+	}
+
+	public void CheckOn(){
+		checkOn = true;
 	}
 }

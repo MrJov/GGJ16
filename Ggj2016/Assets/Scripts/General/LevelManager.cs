@@ -18,6 +18,9 @@ public class LevelManager : MonoBehaviour {
 	public float levelTime = 5f;
 	float elapsedTime = 0f;
 
+	int day = 0;
+	public int rentFrequency = 5;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -56,6 +59,7 @@ public class LevelManager : MonoBehaviour {
 			disposition [i].player.transform.position = disposition [i].gameZone.transform.GetChild (0).position;
 		}
 		InitZones ();
+		day++;
 	}
 
 	void EndLevel(){
@@ -63,10 +67,15 @@ public class LevelManager : MonoBehaviour {
 
 		//TODO: Implement rewards/malus
 
-		FindObjectOfType<RewardManager> ().ResetReward ();
 
 		ResetZones ();
+		FindObjectOfType<RewardManager> ().ResetReward ();
 		FindObjectOfType<MapManager> ().Show ();
+
+		if (day == rentFrequency) {
+			day = 0;
+			FindObjectOfType<MapManager> ().CheckOn ();
+		}
 	}
 
 	void InitZones(){

@@ -11,6 +11,7 @@ public class RewardManager : MonoBehaviour {
 	int actualShare = 0;
 	public float neededPoints;
 	float maxLength;
+	int earnedCoins = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +35,7 @@ public class RewardManager : MonoBehaviour {
 		Debug.Log (progressBar.rectTransform.sizeDelta.x);
 		if (progressBar.rectTransform.sizeDelta.x >= shares [actualShare] * maxLength) {
 			Debug.Log ("+1 COIN");
+			earnedCoins++;
 			if (actualShare != numShares - 1) {
 				actualShare++;
 			}
@@ -42,6 +44,8 @@ public class RewardManager : MonoBehaviour {
 
 	public void ResetReward(){
 		Debug.Log ("RESET");
+		FindObjectOfType<MapManager> ().AddCoins (earnedCoins);
+		earnedCoins = 0;
 		actualShare = 0;
 		progressBar.rectTransform.sizeDelta = new Vector2(0f, progressBar.rectTransform.sizeDelta.y);
 	}
