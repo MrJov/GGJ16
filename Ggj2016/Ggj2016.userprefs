@@ -1,18 +1,19 @@
-﻿<Properties StartupItem="Ggj2016.CSharp.csproj">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\General\MapManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\General\RewardManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\General\RewardManager.cs" Line="47" Column="58" />
+      <File FileName="Assets\Scripts\Player\PlayerMood.cs" Line="26" Column="17" />
+      <File FileName="Assets\Scripts\General\RewardManager.cs" Line="53" Column="56" />
       <File FileName="Assets\Scripts\General\MapManager.cs" Line="52" Column="25" />
-      <File FileName="Assets\Scripts\General\LevelManager.cs" Line="77" Column="43" />
+      <File FileName="Assets\Scripts\General\LevelManager.cs" Line="165" Column="53" />
       <File FileName="Assets\Scripts\Rooms\Kitchen.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Rooms\Garbage.cs" Line="95" Column="33" />
+      <File FileName="Assets\Scripts\Rooms\Garbage.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Rooms\Ironing.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Rooms\BathroomNew.cs" Line="71" Column="5" />
+      <File FileName="Assets\Scripts\Rooms\BathroomNew.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Player\BathroomControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Player\GarbageController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\General\ShowButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\General\Coin.cs" Line="9" Column="2" />
+      <File FileName="Assets\Scripts\General\Coin.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

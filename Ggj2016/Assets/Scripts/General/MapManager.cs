@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MapManager : MonoBehaviour {
@@ -26,7 +27,7 @@ public class MapManager : MonoBehaviour {
 	public GameObject GUI;
 
 	bool addCoins = false;
-	int numCoins = 0;
+	float numCoins = 0;
 	int coinsToAdd = 0;
 	int addedCoins = 0;
 	public GameObject moneyBox;
@@ -35,12 +36,19 @@ public class MapManager : MonoBehaviour {
 	public float coinInterval;
 	float elapsedCoins = 0f;
 	public float coinsSpeed = 8f;
+	public Text coinText;
+	public Text dayText;
+	int day = 1;
 
 	public GameObject check;
+	public GameObject checkInsolvent;
 	public float timeCheck;
 	float elapsedCheck;
 	bool showingCheck = false;
 	bool checkOn = false;
+	public float rent = 20;
+
+	bool playing = true;
 
 	// Use this for initialization
 	void Start () {
@@ -49,20 +57,22 @@ public class MapManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (checkOn && !fadeIn) {
-			ShowCheck ();
-		}
-		if (movePlayers && !showingCheck) {
-			MovePlayers ();
-		}
-		if (addCoins && !showingCheck) {
-			MoveCoins ();
-		}
-		if (fadeOut && !addCoins && !showingCheck) {
-			Fade (false);
-		}
-		if (fadeIn) {
-			Fade (true);
+		if (playing) {
+			if (checkOn && !fadeIn) {
+				ShowCheck ();
+			}
+			if (movePlayers && !showingCheck) {
+				MovePlayers ();
+			}
+			if (addCoins && !showingCheck) {
+				MoveCoins ();
+			}
+			if (fadeOut && !addCoins && !showingCheck) {
+				Fade (false);
+			}
+			if (fadeIn) {
+				Fade (true);
+			}
 		}
 	}
 
@@ -74,6 +84,7 @@ public class MapManager : MonoBehaviour {
 				go.GetComponent<Coin> ().Move (moneyBox, coinsSpeed);
 				addedCoins++;
 				numCoins++;
+				coinText.text = numCoins.ToString();
 				elapsedCoins = 0f;
 			} else {
 				elapsedCoins += Time.deltaTime;
@@ -111,6 +122,8 @@ public class MapManager : MonoBehaviour {
 				players [i].GetComponent<Renderer> ().enabled = false;
 				moneyBox.GetComponent<Renderer> ().enabled = false;
 			}
+			coinText.gameObject.SetActive (false);
+			dayText.gameObject.SetActive (false);
 		}
 	}
 
@@ -135,6 +148,8 @@ public class MapManager : MonoBehaviour {
 					moneyBox.GetComponent<Renderer> ().enabled = true;
 				}
 				fadeIn = false;
+				coinText.gameObject.SetActive (true);
+				dayText.gameObject.SetActive (true);
 				addCoins = true;
 				RotatePositions ();
 				AssignPlayers ();
@@ -150,6 +165,8 @@ public class MapManager : MonoBehaviour {
 	public void Show(){
 		fadeIn = true;
 		GUI.SetActive (false);
+		day++;
+		dayText.text = "DAY " + day.ToString ();
 	}
 
 	void RotatePositions(){
@@ -214,5 +231,15 @@ public class MapManager : MonoBehaviour {
 
 	public void CheckOn(){
 		checkOn = true;
+		numCoins -= rent;
+		coinText.text = numCoins.ToString();
+		if (numCoins < 0) {
+			Color tmp = GetComponent<Renderer> ().material.color;
+			tmp.a = 1;
+			Camera.main.orthographicSize = 8f;
+			GetComponent<Renderer> ().material.color = tmp;
+			checkInsolvent.gameObject.SetActive (true);
+			playing = false;
+		}
 	}
 }

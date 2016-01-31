@@ -5,6 +5,9 @@ public class BathroomNew : MonoBehaviour {
 
 	public float interval = 5f;
 	float elapsedTime = 0f;
+	float resultTimer = .3f;
+	float elapsedResult = 0f;
+	bool showResult = false;
 	public Transform spawnPoint;
 	float offset = 1f;
 	public GameObject [] buttonsToSpawn;
@@ -22,44 +25,49 @@ public class BathroomNew : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (active) {
-			if (elapsedTime > interval) {
-				EraseSequence ();
-				PrepareSequence ();
-			} else {
-				if (activePlayer.GetComponent<BathroomControl> ().IsReady ()) {
-					string[] sequenceInput = activePlayer.GetComponent<BathroomControl> ().GetSequence ();
-					bool correct = true;
-					for (int i = 0; i < sequenceLength; i++)
-                    {
-						if ((sequenceInput [i].Equals ("A") && !sequence[i].GetComponent<ShowButton>().GetLetter().Equals("A")) ||
-							(sequenceInput [i].Equals ("B") && !sequence[i].GetComponent<ShowButton>().GetLetter().Equals("B")) ||
-							(sequenceInput [i].Equals ("X") && !sequence[i].GetComponent<ShowButton>().GetLetter().Equals("X")) ||
-							(sequenceInput [i].Equals ("Y") && !sequence[i].GetComponent<ShowButton>().GetLetter().Equals("Y"))) {
-							correct = false;
-						}
-					}
-					if (correct) {
-                        for (int i = 0; i < sequenceLength; i++)
-                        {
-                            sequence[i].GetComponent<ShowButton>().ShowGreen();
-                        }
-                            FindObjectOfType<RewardManager> ().Increment ();
-					} else {
-
-                        for (int i = 0; i < sequenceLength; i++)
-                        {
-                            sequence[i].GetComponent<ShowButton>().ShowRed();
-                        }
-                        Debug.Log ("STILL OK DUDE");
-					}
+			if (showResult) {
+				if (elapsedResult > resultTimer) {
+					elapsedResult = 0f;
 					EraseSequence ();
 					PrepareSequence ();
+					showResult = false;
+				} else {
+					elapsedResult += Time.deltaTime;
 				}
-				elapsedTime += Time.deltaTime;
+			} else {
+				if (elapsedTime > interval) {
+					EraseSequence ();
+					PrepareSequence ();
+				} else {
+					if (activePlayer.GetComponent<BathroomControl> ().IsReady ()) {
+						string[] sequenceInput = activePlayer.GetComponent<BathroomControl> ().GetSequence ();
+						bool correct = true;
+						for (int i = 0; i < sequenceLength; i++) {
+							if ((sequenceInput [i].Equals ("A") && !sequence [i].GetComponent<ShowButton> ().GetLetter ().Equals ("A")) ||
+							   (sequenceInput [i].Equals ("B") && !sequence [i].GetComponent<ShowButton> ().GetLetter ().Equals ("B")) ||
+							   (sequenceInput [i].Equals ("X") && !sequence [i].GetComponent<ShowButton> ().GetLetter ().Equals ("X")) ||
+							   (sequenceInput [i].Equals ("Y") && !sequence [i].GetComponent<ShowButton> ().GetLetter ().Equals ("Y"))) {
+								correct = false;
+							}
+						}
+						if (correct) {
+							for (int i = 0; i < sequenceLength; i++) {
+								sequence [i].GetComponent<ShowButton> ().ShowGreen ();
+							}
+							FindObjectOfType<RewardManager> ().Increment ();
+						} else {
+
+							for (int i = 0; i < sequenceLength; i++) {
+								sequence [i].GetComponent<ShowButton> ().ShowRed ();
+							}
+						}
+						showResult = true;
+					}
+					elapsedTime += Time.deltaTime;
+				}
+
 			}
-
 		}
-
 	}
 
 	void PrepareSequence(){

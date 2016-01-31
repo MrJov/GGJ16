@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Ironing : MonoBehaviour {
 
+	public Transform leftIron;
+	public Transform rightIron;
+	public Transform iron;
+	float ironSpeed;
 	public Transform leftEnd;
 	public Transform rightEnd;
 	public Transform correctPosition;
@@ -24,6 +28,9 @@ public class Ironing : MonoBehaviour {
 		float cursorWidth = cursor.GetComponent<Renderer> ().bounds.size.x;
 		offset = cursorWidth / 2;
 		ShowElements ();
+		float ironDistance = rightIron.position.x - leftIron.position.x;
+		float cursorDistance = rightEnd.position.x - leftEnd.position.x;
+		ironSpeed = ironDistance * cursorSpeed / cursorDistance;
 	}
 	
 	// Update is called once per frame
@@ -36,6 +43,7 @@ public class Ironing : MonoBehaviour {
 				direction = -1;
 			}
 			cursor.Translate (new Vector3 (cursorSpeed, 0f, 0f) * Time.deltaTime * direction);
+			iron.Translate (new Vector3 (ironSpeed, 0f, 0f) * Time.deltaTime * direction);
 			if (Input.GetButtonDown (playerButton)) {
 				if (correct) {
 					button.GetComponent<ShowButton> ().ShowGreen ();
