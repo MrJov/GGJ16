@@ -58,7 +58,8 @@ public class BathRoom : MonoBehaviour
                     }
                     if (right)
                     {
-
+						Debug.Log ("BATH RIIIIIIIIIGHT!!");
+						FindObjectOfType<RewardManager> ().Increment ();
                     }
 
 
