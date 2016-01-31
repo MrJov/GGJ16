@@ -52,9 +52,14 @@
      <Compile Include="Assets\Scripts\General\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\General\RewardManager.cs" />
      <Compile Include="Assets\Scripts\General\ShowButton.cs" />
+     <Compile Include="Assets\Scripts\General\SlidingButton.cs" />
+     <Compile Include="Assets\Scripts\Player\BathroomControl.cs" />
+     <Compile Include="Assets\Scripts\Player\GarbageController.cs" />
      <Compile Include="Assets\Scripts\Player\IroningController.cs" />
      <Compile Include="Assets\Scripts\Player\KitchenController.cs" />
      <Compile Include="Assets\Scripts\Player\MapPlayer.cs" />
+     <Compile Include="Assets\Scripts\Rooms\BathroomNew.cs" />
+     <Compile Include="Assets\Scripts\Rooms\Garbage.cs" />
      <Compile Include="Assets\Scripts\Rooms\Ironing.cs" />
      <Compile Include="Assets\Scripts\Rooms\Kitchen.cs" />
      <Compile Include="Assets\script\BathRoom.cs" />

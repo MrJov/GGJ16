@@ -6,6 +6,7 @@ public class ShowButton : MonoBehaviour {
 	public GameObject green;
 	public GameObject normal;
 	public GameObject red;
+	public string letter;
 
 	public void ShowNormal(){
 		normal.SetActive (true);
@@ -29,5 +30,9 @@ public class ShowButton : MonoBehaviour {
 		normal.SetActive (false);
 		green.SetActive (false);
 		red.SetActive (false);
+	}
+
+	public string GetLetter(){
+		return letter;
 	}
 }

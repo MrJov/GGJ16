@@ -61,7 +61,7 @@ public class PlayerManager : MonoBehaviour {
 			if (disposition [i].gameZone.gameObject.name.Equals ("BathroomZone"))
             {
 				disposition [i].player.GetComponent<InputButtonToilet> ().Disable ();
-                disposition[i].gameZone.gameObject.GetComponent<BathRoom>().Disabled();
+                disposition[i].gameZone.gameObject.GetComponent<BathRoom>().Disable();
                 disposition [i].player.GetComponent<InputButtonToilet> ().enabled = false;
 				disposition [i].gameZone.gameObject.GetComponent<BathRoom> ().enabled = false;
                 
@@ -117,7 +117,7 @@ public class PlayerManager : MonoBehaviour {
                 }
 				if (disposition [i].gameZone.gameObject.name.Equals ("BathroomZone")) {
 					disposition [i].gameZone.gameObject.GetComponent<BathRoom> ().enabled = true;
-                    disposition[i].gameZone.gameObject.GetComponent<BathRoom>().Enabled(disposition[i].player);
+                    disposition[i].gameZone.gameObject.GetComponent<BathRoom>().Enable(disposition[i].player);
                     disposition [i].player.GetComponent<InputButtonToilet> ().enabled = true;
 					disposition [i].player.GetComponent<InputButtonToilet> ().Enable ();
 				}

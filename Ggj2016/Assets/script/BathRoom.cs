@@ -16,48 +16,34 @@ public class BathRoom : MonoBehaviour
     public GameObject activeplayer;
     private bool enable = false;
 
-    void Start()
-    {
+    void Start(){
         buttons = new List<GameObject>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
-        if(enable)
-        { 
-        t = t + Time.deltaTime;
+        if(enable){ 
+        t += Time.deltaTime;
 
-            if (t >= timer)
-            {
-                for (int i = 0; i < buttons.Count; i++)
-                {
+            if (t >= timer){
+                for (int i = 0; i < buttons.Count; i++){
                     Destroy(buttons[i]);
                 }
-                for (int i = 1; i <= number; i++)
-                {
+                for (int i = 1; i <= number; i++){
                     GameObject B = Instantiate(button, new Vector3(position.position.x + offset * i, position.position.y, position.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                     B.GetComponent<Button>().move = false;
                     buttons.Add(B);
                 }
                 t = 0;
-
-            }
-            else
-            {
-                if (activeplayer.GetComponent<InputButtonToilet>().sequence.Count == buttons.Count)
-                {
+            } else {
+                if (activeplayer.GetComponent<InputButtonToilet>().sequence.Count == buttons.Count) {
                     bool right = true;
-                    for (int i = 0; i < buttons.Count; i++)
-                    {
+                    for (int i = 0; i < buttons.Count; i++){
                         if (!activeplayer.GetComponent<InputButtonToilet>().sequence[i].Equals(buttons[i].GetComponent<Button>().GetType()))
                             right = false;
-
-
                     }
-                    if (right)
-                    {
+                    if (right){
 						Debug.Log ("BATH RIIIIIIIIIGHT!!");
 						FindObjectOfType<RewardManager> ().Increment ();
                     }
@@ -71,20 +57,16 @@ public class BathRoom : MonoBehaviour
         }
     }
 
-    public void Delete()
-    {
+    public void Delete(){
 
-        for (int i = 0; i < buttons.Count; i++)
-        {
+        for (int i = 0; i < buttons.Count; i++) {
             Destroy(buttons[i]);
         }
 
     }
 
-    public void Enabled(GameObject player)
-    {
-        for (int i = 1; i <= number; i++)
-        {
+    public void Enable(GameObject player){
+        for (int i = 1; i <= number; i++){
             GameObject B = Instantiate(button, new Vector3(position.position.x + offset * i, position.position.y, position.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
             B.GetComponent<Button>().move = false;
             buttons.Add(B);
@@ -93,15 +75,13 @@ public class BathRoom : MonoBehaviour
         enable = true;
 
     }
-    public void Disabled()
-    {
 
-        for (int i = 0; i < buttons.Count; i++)
-        {
+    public void Disable(){
+
+        for (int i = 0; i < buttons.Count; i++){
             Destroy(buttons[i]);
         }
         enable = false;
-
     }
 }
 
