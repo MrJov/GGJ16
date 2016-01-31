@@ -12,6 +12,7 @@ public class RewardManager : MonoBehaviour {
 	public float neededPoints;
 	float maxLength;
 	int earnedCoins = 0;
+	public int coinTreshold = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +45,13 @@ public class RewardManager : MonoBehaviour {
 
 	public void ResetReward(){
 		Debug.Log ("RESET");
+		if (earnedCoins < coinTreshold) {
+			// TODO: Apply malus
+			FindObjectOfType<LevelManager> ().ChangeMoods (true);
+		} else {
+			// TODO: Apply bonus
+			FindObjectOfType<LevelManager> ().ChangeMoods (false);
+		}
 		FindObjectOfType<MapManager> ().AddCoins (earnedCoins);
 		earnedCoins = 0;
 		actualShare = 0;
