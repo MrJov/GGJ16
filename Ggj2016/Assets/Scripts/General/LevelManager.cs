@@ -23,7 +23,9 @@ public class LevelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		for (int i = 0; i < players.Length; i++) {
+			players [i].GetComponent<PlayerMood> ().ChangeMood (0);
+		}
 	}
 	
 	// Update is called once per frame
@@ -149,6 +151,18 @@ public class LevelManager : MonoBehaviour {
 				disposition [i].gameZone.gameObject.GetComponent<Ironing> ().Disable ();
 				disposition[i].gameZone.gameObject.GetComponent<Ironing>().enabled = false;
 				disposition [i].player.GetComponent<IroningController> ().enabled = false;
+			}
+		}
+	}
+
+	public void ChangeMoods(bool worst){
+		if (worst) {
+			for (int i = 0; i < players.Length; i++) {
+				players [i].GetComponent<PlayerMood> ().ChangeWorst ();
+			}
+		} else {
+			for (int i = 0; i < players.Length; i++) {
+				players [i].GetComponent<PlayerMood> ().ChangeBest ();
 			}
 		}
 	}

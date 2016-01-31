@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Player\IroningController.cs" />
      <Compile Include="Assets\Scripts\Player\KitchenController.cs" />
      <Compile Include="Assets\Scripts\Player\MapPlayer.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMood.cs" />
      <Compile Include="Assets\Scripts\Rooms\BathroomNew.cs" />
      <Compile Include="Assets\Scripts\Rooms\Garbage.cs" />
      <Compile Include="Assets\Scripts\Rooms\Ironing.cs" />
