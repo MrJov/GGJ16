@@ -10,6 +10,7 @@ public class Button : MonoBehaviour {
     private string type;
     public  bool move = false;
     public bool pressed=false;
+    public float delta;
  
 
 	void Start ()
@@ -45,7 +46,7 @@ public class Button : MonoBehaviour {
         if (move)
         {
             if (!end)
-                transform.position = new Vector3((transform.position.x - 0.1f), transform.position.y, transform.position.z);
+                transform.position = new Vector3((transform.position.x - delta), transform.position.y, transform.position.z);
 
 
         }

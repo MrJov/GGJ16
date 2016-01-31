@@ -37,6 +37,7 @@ public class GarbageRoom: MonoBehaviour
             {
                 Destroy(buttonSpawn);
                 buttonSpawn =Instantiate(button, new Vector3(position.position.x, position.position.y, position.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                limit.GetComponent<SpriteRenderer>().color = Color.white;
                 buttonSpawn.GetComponent<Button>().move = true;
             }
 
