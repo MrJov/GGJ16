@@ -92,7 +92,7 @@ public class Garbage : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D coll){
 		valid = false;
 		if (!hit) {
-			if (currentButton.GetComponent<ShowButton> () != null) {
+			if (currentButton != null && currentButton.GetComponent<ShowButton> () != null) {
 				currentButton.GetComponent<ShowButton> ().ShowRed ();
 			}
 		}

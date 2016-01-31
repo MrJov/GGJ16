@@ -63,6 +63,8 @@ public class LevelManager : MonoBehaviour {
 
 		//TODO: Implement rewards/malus
 
+		FindObjectOfType<RewardManager> ().ResetReward ();
+
 		ResetZones ();
 		FindObjectOfType<MapManager> ().Show ();
 	}
