@@ -23,6 +23,7 @@ public class MapManager : MonoBehaviour {
 	bool fadeIn = false;
 	float elapsedFade = 0f;
 
+	public GameObject GUI;
 
 	// Use this for initialization
 	void Start () {
@@ -64,6 +65,10 @@ public class MapManager : MonoBehaviour {
 		if (disposition [0].arrived && disposition [1].arrived && disposition [2].arrived && disposition [3].arrived) {
 			movePlayers = false;
 			fadeOut = true;
+
+			for (int i = 0; i < players.Length; i++) {
+				players [i].GetComponent<Renderer> ().enabled = false;
+			}
 		}
 	}
 
@@ -72,10 +77,10 @@ public class MapManager : MonoBehaviour {
 		elapsedFade += Time.deltaTime;
 		float percTime = elapsedFade / fadeTime;
 		if (appearing) {
-			Camera.main.orthographicSize = Mathf.Lerp (5f, 8f, percTime);
+			Camera.main.orthographicSize = Mathf.Lerp (5.2f, 8f, percTime);
 			transparency = Mathf.Lerp (0f, 1f, percTime);
 		} else {
-			Camera.main.orthographicSize = Mathf.Lerp (8f, 5f, percTime);
+			Camera.main.orthographicSize = Mathf.Lerp (8f, 5.2f, percTime);
 			transparency = Mathf.Lerp (1f, 0f, percTime);
 		}
 		Color tmp = GetComponent<Renderer> ().material.color;
@@ -90,9 +95,7 @@ public class MapManager : MonoBehaviour {
 				RotatePositions ();
 				AssignPlayers ();
 			} else {
-				for (int i = 0; i < players.Length; i++) {
-					players [i].GetComponent<Renderer> ().enabled = false;
-				}
+				GUI.SetActive (true);
 				fadeOut = false;
 				FindObjectOfType<LevelManager> ().BeginLevel (gameZones);
 			}
@@ -102,6 +105,7 @@ public class MapManager : MonoBehaviour {
 
 	public void Show(){
 		fadeIn = true;
+		GUI.SetActive (false);
 	}
 
 	void RotatePositions(){

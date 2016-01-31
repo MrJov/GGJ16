@@ -39,6 +39,7 @@ public class Ironing : MonoBehaviour {
 			if (Input.GetButtonDown (playerButton)) {
 				if (correct) {
 					button.GetComponent<ShowButton> ().ShowGreen ();
+					FindObjectOfType<RewardManager> ().Increment ();
 				} else {
 					button.GetComponent<ShowButton> ().ShowRed ();
 				}

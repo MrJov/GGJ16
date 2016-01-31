@@ -16,6 +16,7 @@ public class Kitchen : MonoBehaviour {
 
 	Vector2 fullBarSize;
 	float elapsedTime = 0f;
+	float correctTime = 0f;
 	Actions action;
 	bool active = false;
 
@@ -33,6 +34,11 @@ public class Kitchen : MonoBehaviour {
 			if (elapsedTime > actionTime) {
 				action = ChangeAction (Random.Range (0, 4));
 				action.buttonSequence.GetComponent<ShowButton> ().ShowNormal ();
+				float percCorrect = correctTime / actionTime;
+				if (percCorrect >= .5f) {
+					FindObjectOfType<RewardManager> ().Increment ();
+				}
+				correctTime = 0f;
 				elapsedTime = 0f;
 			} else {
 				elapsedTime += Time.deltaTime;
@@ -41,10 +47,10 @@ public class Kitchen : MonoBehaviour {
 			//Debug.Log (actionPerf);
 			if (action.actionName.Equals (actionPerf)) {
 				action.buttonSequence.GetComponent<ShowButton> ().ShowGreen ();
+				correctTime += Time.deltaTime;
 			} else {
 				action.buttonSequence.GetComponent<ShowButton> ().ShowRed ();
 			}
-			float percTime = elapsedTime / actionTime;
 		}
 	}
 
