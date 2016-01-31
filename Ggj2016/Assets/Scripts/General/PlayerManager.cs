@@ -110,14 +110,14 @@ public class PlayerManager : MonoBehaviour {
 				if (disposition [i].gameZone.gameObject.name.Equals ("GarbageZone"))
                 {
 					disposition [i].gameZone.gameObject.GetComponent<GarbageRoom> ().enabled = true;
-                    disposition[i].gameZone.gameObject.GetComponent<GarbageRoom>().Enabled();
+                    disposition[i].gameZone.gameObject.GetComponent<GarbageRoom>().Enabled(disposition[i].player);
                     disposition [i].player.GetComponent<InputButtonTrash> ().enabled = true;
                     disposition [i].player.GetComponent<InputButtonTrash> ().Enable ();
                     
                 }
 				if (disposition [i].gameZone.gameObject.name.Equals ("BathroomZone")) {
 					disposition [i].gameZone.gameObject.GetComponent<BathRoom> ().enabled = true;
-                    disposition[i].gameZone.gameObject.GetComponent<BathRoom>().Enabled();
+                    disposition[i].gameZone.gameObject.GetComponent<BathRoom>().Enabled(disposition[i].player);
                     disposition [i].player.GetComponent<InputButtonToilet> ().enabled = true;
 					disposition [i].player.GetComponent<InputButtonToilet> ().Enable ();
 				}

@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections.Generic;
+using UnityEngine;
+
 
 public class InputButtonToilet : MonoBehaviour
 {
@@ -12,70 +13,42 @@ public class InputButtonToilet : MonoBehaviour
     public GameObject  BathZone;
     BathRoom bath;
     bool active = false;
-    private int count=0;
+    public string pressed;
+    public List<string> sequence;
 
 
     void Start ()
     {
         bath = BathZone.GetComponent<BathRoom>();
-
-
-    }
+        List<string> sequence = new List<string>();
+     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (active && bath.buttons[count] != null)
+        if (active)
         {
-            if (Input.GetButton(buttonA) && bath.buttons[count].gameObject.GetComponent<Button>().getType().Equals("A"))
+            if (Input.GetButton(buttonA))
             {
-                count++;
-
+                sequence.Add("A");
             }
             else
-            if (Input.GetButton(buttonB) && bath.buttons[count].gameObject.GetComponent<Button>().getType().Equals("B"))
+            if (Input.GetButton(buttonB))
             {
-                count++;
+                sequence.Add("B");
             }
             else
-            if (Input.GetButton(buttonX) && bath.buttons[count].gameObject.GetComponent<Button>().getType().Equals("X"))
+            if (Input.GetButton(buttonX))
             {
-                count++;
+                sequence.Add("C");
             }
             else
-            if (Input.GetButton(buttonY) && bath.buttons[count].gameObject.GetComponent<Button>().getType().Equals("Y"))
+            if (Input.GetButton(buttonY))
             {
-                count++;
-
+                sequence.Add("D");
             }
             else
-            {
-                if (bath.buttons[count]!=null)
-                {
-                    switch (bath.buttons[count].gameObject.GetComponent<Button>().getType())
-                    {
-                        case "A":
-                            bath.buttons[count].gameObject.GetComponent<Button>().GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Buttons/A_red-01");
-
-                            break;
-                        case "B":
-                            bath.buttons[count].gameObject.GetComponent<Button>().GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Buttons/B_red-01");
-                            break;
-                        case "X":
-                            bath.buttons[count].gameObject.GetComponent<Button>().GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Buttons/X_red-01");
-
-                            break;
-                        case "Y":
-                            bath.buttons[count].gameObject.GetComponent<Button>().GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Buttons/Y_red-01");
-
-                            break;
-                    }
-                    count = 0;
-                    bath.t = bath.timer;
-                }
-            }
-
-
+                pressed = "";
 
         }
     }

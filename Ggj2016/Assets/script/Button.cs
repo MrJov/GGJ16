@@ -44,18 +44,23 @@ public class Button : MonoBehaviour {
     {
         if (move)
         {
-                    if (!end)
-                        transform.position = new Vector3((transform.position.x - 0.1f), transform.position.y, transform.position.z);
-          
-                
-        }
+            if (!end)
+                transform.position = new Vector3((transform.position.x - 0.1f), transform.position.y, transform.position.z);
 
-       
+
+        }
+    }
+
+    public void Move()
+    {
+           
+
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         pressed = false;
+      
         end = true;
         
     }
