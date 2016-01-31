@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\General\MapManager.cs" />
      <Compile Include="Assets\Scripts\General\MovementSpot.cs" />
      <Compile Include="Assets\Scripts\General\PlayerManager.cs" />
+     <Compile Include="Assets\Scripts\General\RewardManager.cs" />
      <Compile Include="Assets\Scripts\General\ShowButton.cs" />
      <Compile Include="Assets\Scripts\Player\IroningController.cs" />
      <Compile Include="Assets\Scripts\Player\KitchenController.cs" />
